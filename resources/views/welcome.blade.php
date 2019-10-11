@@ -11,6 +11,8 @@
       <th scope="col">Category</th>
       <th scope="col">Auteur</th>
       <th scope="col">Nombre des pages</th>
+      <th scope="col">user</th>
+
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -22,6 +24,7 @@
       <td> {{$livre->category->name}} </td>
       <td> {{$livre->auteur}} </td>
       <td> {{$livre->nbr_pages}} </td>
+      <td> {{$livre->user_id}} </td>
       <td>
         <a href="{{route('voir_livre', $livre->id)}}" class="btn btn-info">Voir</a>
      

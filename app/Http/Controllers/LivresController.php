@@ -31,6 +31,9 @@ class LivresController extends Controller
                                     'nbr_pages'=> '',
                                     'category_id'=> ''
                                   ]);
+
+      $data['user_id']=auth()->user()->id;
+
         //dd($data);
         Livre::create($data);
              //  $livre=new Livre;
@@ -50,6 +53,9 @@ class LivresController extends Controller
     {
         //$livre_a_supprimer=Livre::find($livre)->delete(); 
         $livre_a_supprimer=Livre::where('id',$livre)->first(); 
+        if (auth()->user()->user_id != $livre_a_supprimer->user->id) {
+            return back()->with('error','Vous n\'avez pas le droit!');
+        }
         $livre_a_supprimer->delete();
         return back()->with('success','Votre livre a été supprimé');
     } 
@@ -81,6 +87,8 @@ class LivresController extends Controller
                             'category_id'=> ''
                           ]);
                       //dd($data);
+
+        $data['user_id']=auth()->user()->id;
 
         $livre=Livre::find($id);
         $livre->update($data);
